@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarShoppingTable extends Migration
+class CreateCarShoppingsTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'car_shopping';
+    public $tableName = 'car_shoppings';
 
     /**
      * Run the migrations.
@@ -21,11 +21,10 @@ class CreateCarShoppingTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('car_shop_id');
-            $table->integer('product_id');
+            $table->unsignedInteger('product_id');
             $table->string('username', 10);
-            $table->integer('quantity');
+            $table->unsignedInteger('quantity');
 
             $table->index(["product_id"], 'fk_car_shopping_products_idx');
 

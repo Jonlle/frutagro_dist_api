@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->string('username', 10);
             $table->string('doct_type_id', 3);
             $table->string('rol_id', 6);
@@ -33,7 +32,9 @@ class CreateUsersTable extends Migration
             $table->date('date_created');
             $table->date('date_modified');
 
-            $table->index(["status_id"], 'fk_users_status_idx');
+            $table->primary('username');
+
+            $table->index(["status_id"], 'fk_users_statuses_idx');
 
             $table->index(["rol_id"], 'fk_users_roles_idx');
 
@@ -50,8 +51,8 @@ class CreateUsersTable extends Migration
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('status_id', 'fk_users_status')
-                  ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_users_statuses')
+                  ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

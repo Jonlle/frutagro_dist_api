@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserAddressTable extends Migration
+class CreateUserAddressesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'user_address';
+    public $tableName = 'user_addresses';
 
     /**
      * Run the migrations.
@@ -21,7 +21,6 @@ class CreateUserAddressTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('address_id');
             $table->string('address_type_id', 10);
             $table->string('username', 10);

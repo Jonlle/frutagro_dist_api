@@ -21,11 +21,10 @@ class CreateTaxesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('tax_id');
             $table->string('tax_name', 10);
             $table->string('description', 50);
-            $table->integer('multipler_factor');
+            $table->unsignedInteger('multipler_factor');
         });
     }
 

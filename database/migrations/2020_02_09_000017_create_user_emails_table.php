@@ -21,7 +21,6 @@ class CreateUserEmailsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->string('email', 50);
             $table->string('status_id', 2);
             $table->string('username', 10);
@@ -29,13 +28,15 @@ class CreateUserEmailsTable extends Migration
             $table->date('date_created');
             $table->date('date_modified');
 
+            $table->primary('email');
+
             $table->index(["username"], 'fk_user_emails_users_idx');
 
-            $table->index(["status_id"], 'fk_user_emails_status_idx');
+            $table->index(["status_id"], 'fk_user_emails_statuses_idx');
 
 
-            $table->foreign('status_id', 'fk_user_emails_status')
-                ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_user_emails_statuses')
+                ->references('status_id')->on('statuses')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
 

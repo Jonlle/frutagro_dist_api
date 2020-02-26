@@ -21,13 +21,12 @@ class CreateOrderProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('order_pro_id');
-            $table->integer('order_id');
-            $table->integer('product_id');
-            $table->integer('tax_id');
-            $table->integer('quantity');
-            $table->integer('discount');
+            $table->unsignedInteger('order_id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('tax_id');
+            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('discount');
             $table->string('unit', 10);
 
             $table->index(["tax_id"], 'fk_order_products_taxes_idx');

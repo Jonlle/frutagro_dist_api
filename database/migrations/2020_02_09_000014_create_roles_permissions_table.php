@@ -21,7 +21,6 @@ class CreateRolesPermissionsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('rol_perm_id');
             $table->string('permission_id', 10);
             $table->string('rol_id', 6);

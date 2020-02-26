@@ -21,15 +21,16 @@ class CreatePermissionsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('permission_id');
+            $table->string('permission_id', 10);
             $table->string('status_id', 2);
 
-            $table->index(["status_id"], 'fk_permissions_status_idx');
+            $table->primary('permission_id');
+
+            $table->index(["status_id"], 'fk_permissions_statuses_idx');
 
 
-            $table->foreign('status_id', 'fk_permissions_status')
-                  ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_permissions_statuses')
+                  ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

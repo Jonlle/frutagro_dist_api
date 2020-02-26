@@ -21,15 +21,14 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('payment_id');
             $table->string('status_id', 2);
 
             $table->index(["status_id"], 'fk_status_payments_idx');
 
 
-            $table->foreign('status_id', 'fk_payments_status')
-                  ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_payments_statuses')
+                  ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

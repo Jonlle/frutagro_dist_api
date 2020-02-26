@@ -21,10 +21,9 @@ class CreatePaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('pay_meth_id');
             $table->string('entity_name', 100);
-            $table->integer('payment_id');
+            $table->unsignedInteger('payment_id');
             $table->string('payment_type_id', 10);
             $table->string('reference_id', 25);
 

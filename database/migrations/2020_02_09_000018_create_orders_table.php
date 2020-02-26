@@ -21,9 +21,8 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('order_id');
-            $table->integer('payment_id');
+            $table->unsignedInteger('payment_id');
             $table->string('status_id', 2);
             $table->string('username', 10);
             $table->date('order_date');
@@ -32,7 +31,7 @@ class CreateOrdersTable extends Migration
 
             $table->index(["username"], 'fk_orders_users_idx');
 
-            $table->index(["status_id"], 'fk_orders_status_idx');
+            $table->index(["status_id"], 'fk_orders_statuses_idx');
 
             $table->index(["payment_id"], 'fk_orders_payments_idx');
 
@@ -42,8 +41,8 @@ class CreateOrdersTable extends Migration
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('status_id', 'fk_orders_status')
-                  ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_orders_statuses')
+                  ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 

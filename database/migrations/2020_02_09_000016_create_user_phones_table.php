@@ -21,21 +21,22 @@ class CreateUserPhonesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('phone_number');
+            $table->string('phone_number', 11);
             $table->string('status_id', 2);
             $table->string('username', 10);
             $table->string('principal', 1);
             $table->date('date_created');
             $table->date('date_modified');
 
+            $table->primary('phone_number');
+
             $table->index(["username"], 'fk_user_phones_users_idx');
 
-            $table->index(["status_id"], 'fk_user_phones_status_idx');
+            $table->index(["status_id"], 'fk_user_phones_statuses_idx');
 
 
-            $table->foreign('status_id', 'fk_user_phones_status')
-                  ->references('status_id')->on('status')
+            $table->foreign('status_id', 'fk_user_phones_statuses')
+                  ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 

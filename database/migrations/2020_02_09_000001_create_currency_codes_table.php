@@ -21,7 +21,6 @@ class CreateCurrencyCodesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('currency_code_id');
             $table->string('currency_name', 10);
             $table->double('exchange_rate', 11, 2);

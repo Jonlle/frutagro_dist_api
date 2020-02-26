@@ -21,15 +21,14 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->increments('product_id');
             $table->string('category_id', 25);
-            $table->integer('currency_code_id');
+            $table->unsignedInteger('currency_code_id');
             $table->string('product_name', 40);
             $table->double('price', 11, 2);
-            $table->integer('discount');
+            $table->unsignedInteger('discount');
             $table->string('unit', 10);
-            $table->integer('stock_cant');
+            $table->unsignedInteger('stock_cant');
 
             $table->index(["category_id"], 'fk_products_categories_idx');
 

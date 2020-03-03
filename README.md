@@ -21,5 +21,3 @@ php artisan make:model UserEmail --migration
 php artisan make:model Order --migration
 php artisan make:model CarShopping --migration
 php artisan make:model OrderProduct --migration
-
-

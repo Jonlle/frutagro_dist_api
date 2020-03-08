@@ -25,8 +25,7 @@ class CreateUserEmailsTable extends Migration
             $table->string('status_id', 2);
             $table->string('username', 10);
             $table->string('principal', 1);
-            $table->date('date_created');
-            $table->date('date_modified');
+            $table->timestamps();
 
             $table->primary('email');
 
@@ -36,14 +35,14 @@ class CreateUserEmailsTable extends Migration
 
 
             $table->foreign('status_id', 'fk_user_emails_statuses')
-                ->references('status_id')->on('statuses')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                  ->references('status_id')->on('statuses')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
 
             $table->foreign('username', 'fk_user_emails_users')
-                ->references('username')->on('users')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                  ->references('username')->on('users')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
         });
     }
 
@@ -52,8 +51,8 @@ class CreateUserEmailsTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

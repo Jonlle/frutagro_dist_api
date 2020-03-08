@@ -29,8 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('last_name', 50);
             $table->string('document', 20);
             $table->string('password', 64);
-            $table->date('date_created');
-            $table->date('date_modified');
+            $table->rememberToken();
+            $table->timestamps();
 
             $table->primary('username');
 
@@ -63,8 +63,8 @@ class CreateUsersTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

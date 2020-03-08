@@ -25,8 +25,7 @@ class CreateUserPhonesTable extends Migration
             $table->string('status_id', 2);
             $table->string('username', 10);
             $table->string('principal', 1);
-            $table->date('date_created');
-            $table->date('date_modified');
+            $table->timestamps();
 
             $table->primary('phone_number');
 
@@ -52,8 +51,8 @@ class CreateUserPhonesTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

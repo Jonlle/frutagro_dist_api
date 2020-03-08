@@ -24,9 +24,8 @@ class CreateUserAddressesTable extends Migration
             $table->increments('address_id');
             $table->string('address_type_id', 10);
             $table->string('username', 10);
-            $table->date('date_created');
-            $table->date('date_modified');
             $table->string('address', 200);
+            $table->timestamps();
 
             $table->index(["address_type_id"], 'fk_user_address_address_types_idx');
 
@@ -50,8 +49,8 @@ class CreateUserAddressesTable extends Migration
      *
      * @return void
      */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+    public function down()
+    {
+        Schema::dropIfExists($this->tableName);
+    }
 }

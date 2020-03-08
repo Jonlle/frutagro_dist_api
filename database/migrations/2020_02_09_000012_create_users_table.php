@@ -34,11 +34,11 @@ class CreateUsersTable extends Migration
 
             $table->primary('username');
 
-            $table->index(["status_id"], 'fk_users_statuses_idx');
+            $table->index(["doct_type_id"], 'fk_users_doct_types');
 
             $table->index(["rol_id"], 'fk_users_roles_idx');
 
-            $table->index(["doct_type_id"], 'fk_users_doct_types');
+            $table->index(["status_id"], 'fk_users_statuses_idx');
 
 
             $table->foreign('doct_type_id', 'fk_users_doct_types')

@@ -17,7 +17,7 @@ class AuthController extends BaseController
     $validator = Validator::make($request->all(), [
         'username' => 'required',
         'doct_type_id' => 'required',
-        'rol_id' => 'required',
+        'role_id' => 'required',
         'status_id' => 'required',
         'first_name' => 'required',
         'last_name' => 'required',

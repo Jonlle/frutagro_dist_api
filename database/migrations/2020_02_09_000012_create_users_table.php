@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->string('username', 10);
             $table->string('doct_type_id', 3);
-            $table->string('rol_id', 6);
+            $table->string('role_id', 6);
             $table->string('status_id', 2);
             $table->string('first_name', 50);
             $table->string('last_name', 50);
@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
 
             $table->index(["doct_type_id"], 'fk_users_doct_types');
 
-            $table->index(["rol_id"], 'fk_users_roles_idx');
+            $table->index(["role_id"], 'fk_users_roles_idx');
 
             $table->index(["status_id"], 'fk_users_statuses_idx');
 
@@ -46,8 +46,8 @@ class CreateUsersTable extends Migration
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('rol_id', 'fk_users_roles')
-                  ->references('rol_id')->on('roles')
+            $table->foreign('role_id', 'fk_users_roles')
+                  ->references('role_id')->on('roles')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 

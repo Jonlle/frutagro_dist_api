@@ -21,11 +21,11 @@ class CreateRolesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->string('rol_id', 6);
+            $table->string('role_id', 6);
             $table->string('status_id', 2);
             $table->string('description', 50);
 
-            $table->primary('rol_id');
+            $table->primary('role_id');
 
             $table->index(["status_id"], 'fk_roles_statuses_idx');
 

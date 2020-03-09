@@ -26,7 +26,7 @@ class AuthController extends BaseController
     ]);
 
     if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors(), 422);
+        return $this->sendError('Validation Error.', $validator->errors(), BaseController::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     $data = $request->all();
@@ -35,7 +35,7 @@ class AuthController extends BaseController
     $success['token'] = $user->createToken('Frutagro_dist')->accessToken;
     $success['username'] =  $user->username;
 
-    return $this->sendResponse($success, 'User register successfully.');
+    return $this->sendResponse($success, 'User register successfully.', BaseController::HTTP_CREATED);
   }
 
   public function login(Request $request)
@@ -53,7 +53,7 @@ class AuthController extends BaseController
       return $this->sendResponse($success, 'User login successfully.');
     }
     else {
-        return $this->sendError('Unauthorised.', ['error'=>'Unauthorised'], 401);
+        return $this->sendError('Unauthorised.', ['error'=>'Unauthorised'], BaseController::HTTP_UNAUTHORIZED);
     }
   }
 

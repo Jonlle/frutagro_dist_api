@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDoctTypesTable extends Migration
+class CreateDocumentTypesTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'doct_types';
+    public $tableName = 'document_types';
 
     /**
      * Run the migrations.
-     * @table doct_types
+     * @table document_types
      *
      * @return void
      */
@@ -27,10 +27,10 @@ class CreateDoctTypesTable extends Migration
 
             $table->primary('doc_type_id');
 
-            $table->index(["status_id"], 'fk_doct_types_statuses_idx');
+            $table->index(["status_id"], 'fk_document_types_statuses_idx');
 
 
-            $table->foreign('status_id', 'fk_doct_types_statuses')
+            $table->foreign('status_id', 'fk_document_types_statuses')
                   ->references('status_id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');

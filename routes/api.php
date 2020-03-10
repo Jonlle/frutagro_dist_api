@@ -13,10 +13,16 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'API\UserController@register');
-Route::post('login', 'API\UserController@login');
+Route::prefix('v1')->group(function () {
+    Route::prefix('/auth')->group(function () {
+        Route::post('register', 'API\UserController@register')->name('user.register');
+        Route::post('login', 'API\UserController@login')->name('user.login');
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'API\UserController@getAuthUser');
-    Route::get('logout', 'API\UserController@logout');
+        Route::middleware('auth:api')->group(function () {
+            Route::get('user', 'API\UserController@getAuthUser')->name('user');
+            Route::get('logout', 'API\UserController@logout')->name('user.logout');
+        });
+
+    });
 });
+

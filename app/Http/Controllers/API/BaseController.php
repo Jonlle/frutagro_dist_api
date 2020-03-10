@@ -13,6 +13,7 @@ class BaseController extends Controller
     CONST HTTP_CREATED = Response::HTTP_CREATED;                            // 201
     CONST HTTP_BAD_REQUEST = Response::HTTP_BAD_REQUEST;                    // 400
     CONST HTTP_UNAUTHORIZED = Response::HTTP_UNAUTHORIZED;                  // 401
+    CONST HTTP_FORBIDDEN = Response::HTTP_FORBIDDEN;                        // 403
     CONST HTTP_NOT_FOUND = Response::HTTP_NOT_FOUND;                        // 404
     CONST HTTP_UNPROCESSABLE_ENTITY = Response::HTTP_UNPROCESSABLE_ENTITY;  // 422
 

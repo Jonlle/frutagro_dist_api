@@ -20,7 +20,7 @@ Route::prefix('v1')->group(function () {
 
         Route::middleware('auth:api')->group(function () {
             Route::get('user', 'API\UserController@getAuthUser')->name('user');
-            Route::get('logout', 'API\UserController@logout')->name('user.logout');
+            Route::post('logout', 'API\UserController@logout')->name('user.logout');
         });
 
     });

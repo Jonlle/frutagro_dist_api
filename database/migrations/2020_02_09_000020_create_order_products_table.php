@@ -21,7 +21,7 @@ class CreateOrderProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('order_pro_id');
+            $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('tax_id');
@@ -29,25 +29,22 @@ class CreateOrderProductsTable extends Migration
             $table->unsignedInteger('discount');
             $table->string('unit', 10);
 
+            $table->index(["order_id"], 'fk_order_products_orders_idx');
+            $table->index(["product_id"], 'fk_order_products_products_idx');
             $table->index(["tax_id"], 'fk_order_products_taxes_idx');
 
-            $table->index(["order_id"], 'fk_order_products_orders_idx');
-
-            $table->index(["product_id"], 'fk_order_products_products_idx');
-
-
             $table->foreign('order_id', 'fk_order_products_orders')
-                  ->references('order_id')->on('orders')
+                  ->references('id')->on('orders')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
             $table->foreign('product_id', 'fk_order_products_products')
-                  ->references('product_id')->on('products')
+                  ->references('id')->on('products')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
             $table->foreign('tax_id', 'fk_order_products_taxes')
-                  ->references('tax_id')->on('taxes')
+                  ->references('id')->on('taxes')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

@@ -21,31 +21,28 @@ class CreatePaymentMethodsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('pay_meth_id');
-            $table->string('entity_name', 100);
+            $table->increments('id');
+            $table->unsignedInteger('financial_entity_id');
             $table->unsignedInteger('payment_id');
             $table->string('payment_type_id', 10);
             $table->string('reference_id', 25);
 
+            $table->index(["financial_entity_id"], 'fk_payment_methods_financial_entity_idx');
+            $table->index(["payment_type_id"], 'fk_payment_methods_payment_types_idx');
             $table->index(["payment_id"], 'fk_payments_methods_payment_idx');
 
-            $table->index(["payment_type_id"], 'fk_payment_methods_payment_types_idx');
-
-            $table->index(["entity_name"], 'fk_payment_methods_financial_entity_idx');
-
-
-            $table->foreign('entity_name', 'fk_payment_methods_financial_entity')
-                  ->references('entity_name')->on('financial_entities')
-                  ->onDelete('restrict')
-                  ->onUpdate('restrict');
-
-            $table->foreign('payment_type_id', 'fk_payment_methods_payment_types')
-                  ->references('PAYMENT_TYPE_ID')->on('payment_types')
+            $table->foreign('financial_entity_id', 'fk_payment_methods_financial_entity')
+                  ->references('id')->on('financial_entities')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
             $table->foreign('payment_id', 'fk_payment_methods_payments')
-                  ->references('payment_id')->on('payments')
+                  ->references('id')->on('payments')
+                  ->onDelete('restrict')
+                  ->onUpdate('restrict');
+
+            $table->foreign('payment_type_id', 'fk_payment_methods_payment_types')
+                  ->references('id')->on('payment_types')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

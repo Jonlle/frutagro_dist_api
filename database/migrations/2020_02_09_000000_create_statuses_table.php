@@ -21,10 +21,10 @@ class CreateStatusesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->string('status_id', 2);
+            $table->string('id', 2);
             $table->string('description', 50);
 
-            $table->primary('status_id');
+            $table->primary('id');
         });
     }
 

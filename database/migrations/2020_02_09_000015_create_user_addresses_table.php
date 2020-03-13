@@ -21,24 +21,22 @@ class CreateUserAddressesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('address_id');
+            $table->increments('id');
             $table->string('address_type_id', 10);
-            $table->string('username', 10);
+            $table->unsignedInteger('user_id');
             $table->string('address', 200);
             $table->timestamps();
 
             $table->index(["address_type_id"], 'fk_user_address_address_types_idx');
-
-            $table->index(["username"], 'fk_user_address_users_idx');
-
+            $table->index(["user_id"], 'fk_user_address_users_idx');
 
             $table->foreign('address_type_id', 'fk_user_address_address_types')
-                  ->references('address_type_id')->on('address_types')
+                  ->references('id')->on('address_types')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('username', 'fk_user_address_users')
-                  ->references('username')->on('users')
+            $table->foreign('user_id', 'fk_user_address_users')
+                  ->references('id')->on('users')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

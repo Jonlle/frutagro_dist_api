@@ -21,17 +21,16 @@ class CreateDocumentTypesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->string('doc_type_id', 3);
+            $table->string('id', 3);
             $table->string('status_id', 2);
             $table->string('description', 50);
 
-            $table->primary('doc_type_id');
+            $table->primary('id');
 
             $table->index(["status_id"], 'fk_document_types_statuses_idx');
 
-
             $table->foreign('status_id', 'fk_document_types_statuses')
-                  ->references('status_id')->on('statuses')
+                  ->references('id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

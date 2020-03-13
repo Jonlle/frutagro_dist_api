@@ -21,26 +21,25 @@ class CreateUserEmailsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
+            $table->increments('id');
             $table->string('email', 50);
             $table->string('status_id', 2);
-            $table->string('username', 10);
+            $table->unsignedInteger('user_id');
             $table->string('principal', 1);
             $table->timestamps();
 
-            $table->primary('email');
-
-            $table->index(["username"], 'fk_user_emails_users_idx');
+            $table->unique('email');
 
             $table->index(["status_id"], 'fk_user_emails_statuses_idx');
-
+            $table->index(["user_id"], 'fk_user_emails_users_idx');
 
             $table->foreign('status_id', 'fk_user_emails_statuses')
-                  ->references('status_id')->on('statuses')
+                  ->references('id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('username', 'fk_user_emails_users')
-                  ->references('username')->on('users')
+            $table->foreign('user_id', 'fk_user_emails_users')
+                  ->references('id')->on('users')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

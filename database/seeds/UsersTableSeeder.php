@@ -13,10 +13,12 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             'username' => 'frutagro',
+            'doc_type_id' => 'rif',
             'role_id' => 'owner',
             'status_id' => '01',
             'first_name' => 'Frutagro',
             'last_name' => 'Distribuidora',
+            'document' => 'J1234',
             'password' => bcrypt('frutagro'),
             "created_at" =>  \Carbon\Carbon::now(),
             "updated_at" => \Carbon\Carbon::now(),

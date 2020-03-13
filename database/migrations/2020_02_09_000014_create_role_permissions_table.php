@@ -21,22 +21,20 @@ class CreateRolePermissionsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('role_perm_id');
+            $table->increments('id');
             $table->string('permission_id', 10);
             $table->string('role_id', 6);
 
             $table->index(["permission_id"], 'fk_role_permissions_permissions_idx');
-
             $table->index(["role_id"], 'fk_role_permissions_roles_idx');
 
-
             $table->foreign('permission_id', 'fk_role_permissions_permissions')
-                  ->references('permission_id')->on('permissions')
+                  ->references('id')->on('permissions')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
             $table->foreign('role_id', 'fk_role_permissions_roles')
-                  ->references('role_id')->on('roles')
+                  ->references('id')->on('roles')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

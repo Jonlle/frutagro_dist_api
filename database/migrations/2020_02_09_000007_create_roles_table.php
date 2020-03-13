@@ -21,17 +21,16 @@ class CreateRolesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->string('role_id', 6);
+            $table->string('id', 6);
             $table->string('status_id', 2);
             $table->string('description', 50);
 
-            $table->primary('role_id');
+            $table->primary('id');
 
             $table->index(["status_id"], 'fk_roles_statuses_idx');
 
-
             $table->foreign('status_id', 'fk_roles_statuses')
-                  ->references('status_id')->on('statuses')
+                  ->references('id')->on('statuses')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

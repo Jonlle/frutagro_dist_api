@@ -6,11 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    protected $primaryKey = 'rol_id';
-    protected $keyType = 'string';
-    public $timestamps = false;
+    // protected $primaryKey = 'rol_id';
+    // protected $keyType = 'string';
 
     protected $fillable = [
-        'role_id', 'status_id', 'description'
+        'id', 'status_id', 'description'
     ];
 }

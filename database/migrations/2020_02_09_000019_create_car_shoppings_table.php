@@ -21,23 +21,22 @@ class CreateCarShoppingsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('car_shop_id');
+            $table->increments('id');
             $table->unsignedInteger('product_id');
-            $table->string('username', 10);
+            $table->unsignedInteger('user_id');
             $table->unsignedInteger('quantity');
 
             $table->index(["product_id"], 'fk_car_shopping_products_idx');
-
-            $table->index(["username"], 'fk_car_shopping_user_idx');
+            $table->index(["user_id"], 'fk_car_shopping_user_idx');
 
 
             $table->foreign('product_id', 'fk_car_shopping_products')
-                  ->references('product_id')->on('products')
+                  ->references('id')->on('products')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('username', 'fk_car_shopping_user')
-                  ->references('username')->on('users')
+            $table->foreign('user_id', 'fk_car_shopping_user')
+                  ->references('id')->on('users')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

@@ -13,10 +13,10 @@ class StatusesTableSeeder extends Seeder
     public function run()
     {
         $statuses = [
-            ['status_id' => '01', 'description' => 'enabled'],
-            ['status_id' => '02', 'description' => 'disabled'],
-            ['status_id' => '03', 'description' => 'active'],
-            ['status_id' => '04', 'description' => 'inactive']
+            ['id' => '01', 'description' => 'enabled'],
+            ['id' => '02', 'description' => 'disabled'],
+            ['id' => '03', 'description' => 'active'],
+            ['id' => '04', 'description' => 'inactive']
         ];
 
         DB::table('statuses')->insert($statuses);

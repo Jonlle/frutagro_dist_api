@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->increments('product_id');
+            $table->increments('id');
             $table->string('category_id', 25);
             $table->unsignedInteger('currency_code_id');
             $table->string('product_name', 40);
@@ -31,17 +31,15 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('stock_cant');
 
             $table->index(["category_id"], 'fk_products_categories_idx');
-
             $table->index(["currency_code_id"], 'fk_products_currency_codes_idx');
 
-
             $table->foreign('category_id', 'fk_products_categories')
-                  ->references('category_id')->on('categories')
+                  ->references('id')->on('categories')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
             $table->foreign('currency_code_id', 'fk_products_currency_codes')
-                  ->references('currency_code_id')->on('currency_codes')
+                  ->references('id')->on('currency_codes')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

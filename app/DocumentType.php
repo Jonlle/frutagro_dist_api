@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentType extends Model
 {
-    protected $primaryKey = 'doc_type_id';
-    protected $keyType = 'string';
+    // protected $primaryKey = 'doc_type_id';
+    // protected $keyType = 'string';
 }

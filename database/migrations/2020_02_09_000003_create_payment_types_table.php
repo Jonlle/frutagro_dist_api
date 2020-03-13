@@ -21,10 +21,10 @@ class CreatePaymentTypesTable extends Migration
     public function up()
     {
         Schema::create($this->tableName, function (Blueprint $table) {
-            $table->string('payment_type_id', 10);
+            $table->string('id', 10);
             $table->string('description', 50);
 
-            $table->primary('payment_type_id');
+            $table->primary('id');
         });
     }
 

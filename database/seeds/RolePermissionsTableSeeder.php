@@ -17,7 +17,9 @@ class RolePermissionsTableSeeder extends Seeder
             ['permission_id' => 'update', 'role_id' => 'owner'],
             ['permission_id' => 'delete', 'role_id' => 'owner']
         ];
-        // 'role_perm_id' => 'create'
-        DB::table('role_permissions')->insert($role_permissions);
+
+        foreach ($role_permissions as $row) {
+            App\RolePermission::create($row);
+        }
     }
 }

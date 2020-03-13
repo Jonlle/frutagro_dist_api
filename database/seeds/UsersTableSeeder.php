@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
+        App\User::create([
             'username' => 'frutagro',
             'doc_type_id' => 'rif',
             'role_id' => 'owner',
@@ -20,10 +20,6 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'Distribuidora',
             'document' => 'J1234',
             'password' => bcrypt('frutagro'),
-            "created_at" =>  \Carbon\Carbon::now(),
-            "updated_at" => \Carbon\Carbon::now(),
-        ];
-
-        DB::table('users')->insert($users);
+        ]);
     }
 }

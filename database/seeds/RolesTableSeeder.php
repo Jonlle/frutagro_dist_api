@@ -18,6 +18,8 @@ class RolesTableSeeder extends Seeder
             ['id' => 'user', 'status_id' => '01', 'description' => 'Usuario'],
         ];
 
-        DB::table('roles')->insert($roles);
+        foreach ($roles as $row) {
+            App\Role::create($row);
+        }
     }
 }

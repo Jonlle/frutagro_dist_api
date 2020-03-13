@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DocumentTypesTableSeeder extends Seeder
 {
@@ -18,6 +17,8 @@ class DocumentTypesTableSeeder extends Seeder
             ['id' => 'p', 'status_id' => '01', 'description' => 'Pasaporte']
         ];
 
-        DB::table('document_types')->insert($doc_types);
+        foreach ($doc_types as $row) {
+            App\DocumentType::create($row);
+        }
     }
 }

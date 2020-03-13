@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class StatusesTableSeeder extends Seeder
 {
@@ -19,6 +18,8 @@ class StatusesTableSeeder extends Seeder
             ['id' => '04', 'description' => 'inactive']
         ];
 
-        DB::table('statuses')->insert($statuses);
+        foreach ($statuses as $row) {
+            App\Status::create($row);
+        }
     }
 }

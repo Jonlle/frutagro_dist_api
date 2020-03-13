@@ -18,6 +18,8 @@ class PermissionsTableSeeder extends Seeder
             ['id' => 'delete', 'status_id' => '01']
         ];
 
-        DB::table('permissions')->insert($permissions);
+        foreach ($permissions as $row) {
+            App\Permission::create($row);
+        }
     }
 }

@@ -11,9 +11,6 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, Notifiable;
 
-    // protected $primaryKey = 'username';
-    // protected $keyType = 'string';
-
     protected $fillable = [
         'username', 'doc_type_id', 'role_id', 'status_id', 'first_name', 'last_name', 'document', 'password'
     ];

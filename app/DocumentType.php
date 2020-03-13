@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentType extends Model
 {
-    // protected $primaryKey = 'doc_type_id';
-    // protected $keyType = 'string';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'id', 'status_id', 'description'
+    ];
 }

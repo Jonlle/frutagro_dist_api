@@ -3,8 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class RolePermission extends Model
+class PermissionRole extends Pivot
 {
     public $timestamps = false;
 

@@ -44,4 +44,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\CarShopping');
     }
 
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
+    }
+
+    public function document_type()
+    {
+        return $this->belongsTo('App\DocumentType');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('App\Role');
+    }
+
 }

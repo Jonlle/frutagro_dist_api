@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRolePermissionsTable extends Migration
+class CreatePermissionRoleTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'role_permissions';
+    public $tableName = 'permission_role';
 
     /**
      * Run the migrations.
@@ -22,19 +22,19 @@ class CreateRolePermissionsTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->increments('id');
-            $table->string('permission_id', 10);
             $table->string('role_id', 6);
+            $table->string('permission_id', 10);
 
-            $table->index(["permission_id"], 'fk_role_permissions_permissions_idx');
-            $table->index(["role_id"], 'fk_role_permissions_roles_idx');
+            $table->index(["role_id"], 'fk_permission_role_roles_idx');
+            $table->index(["permission_id"], 'fk_permission_role_permissions_idx');
 
-            $table->foreign('permission_id', 'fk_role_permissions_permissions')
-                  ->references('id')->on('permissions')
+            $table->foreign('role_id', 'fk_permission_role_roles')
+                  ->references('id')->on('roles')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
 
-            $table->foreign('role_id', 'fk_role_permissions_roles')
-                  ->references('id')->on('roles')
+            $table->foreign('permission_id', 'fk_permission_role_permissions')
+                  ->references('id')->on('permissions')
                   ->onDelete('restrict')
                   ->onUpdate('restrict');
         });

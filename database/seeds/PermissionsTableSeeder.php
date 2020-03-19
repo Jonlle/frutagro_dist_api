@@ -12,6 +12,7 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $permissions = [
+            ['id' => 'all', 'status_id' => '01'],
             ['id' => 'create', 'status_id' => '01'],
             ['id' => 'read', 'status_id' => '01'],
             ['id' => 'update', 'status_id' => '01'],

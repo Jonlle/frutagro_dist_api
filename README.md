@@ -1,23 +1,75 @@
-## Modelos
+# Distribuidora Frutagro API
+API creada para ser consumida por la aplicación web de la Distribuidora Frutagro. Desarrollado con el framework Laravel 7 y protegida con Laravel Passport para su autenticación a través de access token. 
 
-php artisan make:model Status --migration
-php artisan make:model CurrencyCode --migration
-php artisan make:model Tax --migration
-php artisan make:model PaymentType --migration
-php artisan make:model AddressType --migration
-php artisan make:model Category --migration
-php artisan make:model DoctType --migration
-php artisan make:model Role --migration
-php artisan make:model FinancialEntity --migration
-php artisan make:model Product --migration
-php artisan make:model Payment --migration
-php artisan make:model Permission --migration
-php artisan make:model User --migration
-php artisan make:model PaymentMethod --migration
-php artisan make:model RolePermission --migration
-php artisan make:model UserAddress --migration
-php artisan make:model UserPhone --migration
-php artisan make:model UserEmail --migration
-php artisan make:model Order --migration
-php artisan make:model CarShopping --migration
-php artisan make:model OrderProduct --migration
+## Dependencias
+
+- **Apache HTTPD** >= 2.4
+- **PHP** >= 7.2.5
+- **MySql** >= 5.7
+- **Composer**
+
+## Instalación
+
+Siga los pasos a continuación para instalar y configurar la aplicación.
+
+**Clonar repositorio**
+
+```git clone https://github.com/Jonlle/frutagro_dist_api.git```
+
+**Instalar dependencias**
+
+``composer install``
+
+**Archivo ``.env``**
+
+Copie el contenido del archivo ``.env.example`` en el archivo ``.env``. Modificar los siguientes datos para la conexión con la BD.
+
+```
+DB_HOST=127.0.0.1 //hostname de la DB
+DB_PORT=3306 //puerto de la BD
+DB_DATABASE=nombre_bd
+DB_USERNAME=usuario
+DB_PASSWORD=password
+```
+
+``
+DB_HOST=127.0.0.1 //hostname de la DB
+DB_PORT=3306 //puerto de la BD
+DB_DATABASE=nombre_bd
+DB_USERNAME=usuario
+DB_PASSWORD=password
+``
+
+`
+DB_HOST=127.0.0.1 //hostname de la DB
+DB_PORT=3306 //puerto de la BD
+DB_DATABASE=nombre_bd
+DB_USERNAME=usuario
+DB_PASSWORD=password
+`
+
+**Ejecutar migración y seeding**
+
+Ejecute el siguiente comando para migrar las tablas e inicializar la BD con los datos predeterminados.
+
+```php artisan migrate --seed```
+
+**Instalar Passport**
+
+``php artisan passport:install``
+
+## API EndPoints
+
+**URL API:** `http://localhost:8000/api/v1/`
+
+**Auth**
+
+-User GET http://localhost:8000/api/v1/user
+
+**User**
+
+Post GET All http://localhost:8000/api/v1/posts
+Post GET Single http://localhost:8000/api/v1/posts/1
+Post POST Create http://localhost:8000/api/v1/posts
+Post PUT Update http://localhost:8000/api/v1/posts/1
+Post DELETE destroy http://localhost:8000/api/v1/posts/1

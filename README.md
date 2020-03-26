@@ -46,15 +46,15 @@ Ejecute el siguiente comando para migrar las tablas e inicializar la BD con los 
 
 **URL API:** `http://localhost:8000/api/v1`
 
-| Verb     |  URI           | Descripción      |
-| -------- | -------------- | ---------------- |
-| `POST`   | /auth/register | Register         |
-| `POST`   | /auth/login    | Login            |
-| `POST`   | /auth/logout   | Logout           |
-| `GET`    | /auth/user     | Show user auth   |
-| -------- | -------------- | ---------------- |
-| `GET`    | /users         | Show all user    |
-| `POST`   | /users         | Create user      |
-| `GET`    | /users/{user}  | Show single user |
-| `PUT`    | /users/{user}  | Update user      |
-| `DELETE` | /users/{user}  | Delete user      |
+| Verb     |  URI             | Descripción      |
+| -------- | ---------------- | ---------------- |
+| `POST`   | `/auth/register` | Register         |
+| `POST`   | `/auth/login`    | Login            |
+| `POST`   | `/auth/logout`   | Logout           |
+| `GET`    | `/auth/user`     | Show user auth   |
+|          |                  |                  |
+| `GET`    | `/users`         | Show all user    |
+| `POST`   | `/users`         | Create user      |
+| `GET`    | `/users/{user}`  | Show single user |
+| `PUT`    | `/users/{user}`  | Update user      |
+| `DELETE` | `/users/{user}`  | Delete user      |

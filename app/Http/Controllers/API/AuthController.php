@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Resources\UserCollection;
-use App\Http\Resources\User as UserResource;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -36,7 +34,11 @@ class AuthController extends BaseController
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), BaseController::HTTP_UNPROCESSABLE_ENTITY);
+            return $this->sendError('Validation error.', $validator->errors(), BaseController::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        if (User::firstWhere('username', $request->username)) {
+            return $this->sendError('A user with this username already exists.', [], BaseController::HTTP_CONFLICT);
         }
 
         $data = $request->all();
@@ -61,7 +63,7 @@ class AuthController extends BaseController
 
         return $this->sendResponse($success, 'User login successfully.');
         } else {
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised'], BaseController::HTTP_UNAUTHORIZED);
+            return $this->sendError('Unauthorised.', [], BaseController::HTTP_UNAUTHORIZED);
         }
     }
 

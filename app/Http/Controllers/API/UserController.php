@@ -53,7 +53,14 @@ class UserController extends BaseController
      */
     public function show($id)
     {
+        $user = User::find($id);
+
+        if(!$user) {
+            return $this->sendError('User no found.', []);
+        }
+
         $user =  new UserResource(User::find($id));
+
         return $this->sendResponse($user, 'User has been retrieved successfully.');
     }
 
@@ -69,12 +76,15 @@ class UserController extends BaseController
         $validated = $request->validated();
 
         $user = User::find($id);
+
         if(!$user) {
             return $this->sendError('User no found.', []);
         }
+
         foreach ($validated as $key => $value) {
             $user[$key] = $value;
         }
+
         $user->save();
         $success = new UserResource($user);
 
@@ -90,9 +100,11 @@ class UserController extends BaseController
     public function destroy($id)
     {
         $user = User::find($id);
+
         if(!$user) {
             return $this->sendError('User no found.', []);
         }
+
         $user->delete();
 
         return $this->sendResponse([], 'User has been deleted successfully.');

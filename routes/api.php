@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Resources\User as UserResource;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +17,14 @@ use Illuminate\Http\Request;
 
 Route::prefix('v1')->group(function () {
     Route::prefix('/auth')->group(function () {
-        Route::post('register', 'API\UserController@register')->name('user.register');
-        Route::post('login', 'API\UserController@login')->name('user.login');
-
-        Route::middleware('auth:api')->group(function () {
-            Route::get('user', 'API\UserController@getAuthUser')->name('user');
-            Route::post('logout', 'API\UserController@logout')->name('user.logout');
-        });
-
+        Route::post('register', 'API\AuthController@register')->name('auth.register');
+        Route::post('login', 'API\AuthController@login')->name('auth.login');
+        Route::post('logout', 'API\AuthController@logout')->name('auth.logout');
+        Route::get('user', 'API\AuthController@user')->name('auth.user');
     });
+
+    Route::apiResource('/users', 'API\UserController');
+    Route::apiResource('roles', 'RoleController');
+
 });
 

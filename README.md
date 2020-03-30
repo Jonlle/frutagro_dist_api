@@ -54,7 +54,7 @@ Ejecute el siguiente comando para migrar las tablas e inicializar la BD con los 
 | `GET`    | `/auth/user`     | Show user auth   |
 | -------- | **Users**        | ---------------- |
 | `GET`    | `/users`         | Show all user    |
-| `POST`   | `/users` jonlle  | Create user      |
+| `POST`   | `/users`         | Create user      |
 | `GET`    | `/users/{user}`  | Show single user |
 | `PUT`    | `/users/{user}`  | Update user      |
 | `DELETE` | `/users/{user}`  | Delete user      |

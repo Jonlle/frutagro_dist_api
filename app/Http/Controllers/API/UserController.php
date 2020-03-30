@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\User as UserResource;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -10,59 +13,88 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController
 {
-
-    public function register(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|max:10',
-            'doc_type_id' => 'required|max:3',
-            'role_id' => 'required|max:6',
-            'status_id' => 'required|max:2',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'document' => 'required',
-            'password' => 'required',
-        ]);
+        $users =  new UserCollection(User::all());
+        return $this->sendResponse($users, 'Users has been retrieved successfully.');
+    }
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors(), BaseController::HTTP_UNPROCESSABLE_ENTITY);
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  UserRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserRequest $request)
+    {
+        $validated = $request->validated();
+
+        if (User::firstWhere('username', $request->username)) {
+            return $this->sendError('A user with this username already exists.', [], BaseController::HTTP_CONFLICT);
         }
 
-        $data = $request->all();
-        $data['password'] = bcrypt($data['password']);
-        $user = User::create($data);
-        $success =  $user;
+        $user = new User($validated);
+        $user->save();
+        $success = new UserResource($user);
 
-        return $this->sendResponse($success, 'User register successfully.', BaseController::HTTP_CREATED);
+        return $this->sendResponse($success, 'User has been created successfully.', BaseController::HTTP_CREATED);
     }
 
-    public function login(Request $request)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $credentials = [
-            'username' => $request->username,
-            'password' => $request->password
-        ];
+        $user =  new UserResource(User::find($id));
+        return $this->sendResponse($user, 'User has been retrieved successfully.');
+    }
 
-        if (auth()->attempt($credentials)) {
-        $user = Auth::user();
-        $success['token'] = $user->createToken('Frutagro_dist')->accessToken;
-        $success['username'] =  $user->username;
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  UserRequest  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UserRequest $request, $id)
+    {
+        $validated = $request->validated();
 
-        return $this->sendResponse($success, 'User login successfully.');
-        } else {
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised'], BaseController::HTTP_UNAUTHORIZED);
+        $user = User::find($id);
+        if(!$user) {
+            return $this->sendError('User no found.', []);
         }
+        foreach ($validated as $key => $value) {
+            $user[$key] = $value;
+        }
+        $user->save();
+        $success = new UserResource($user);
+
+        return $this->sendResponse($success, 'User has been updated successfully.');
     }
 
-    public function logout(Request $request)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
     {
-        $request->user()->token()->revoke();
-        return response()->json(['message' =>'User logout successfully'], 200);
-    }
+        $user = User::find($id);
+        if(!$user) {
+            return $this->sendError('User no found.', []);
+        }
+        $user->delete();
 
-    public function getAuthUser(){
-        $user = Auth::user();
-        return $this->sendResponse($user, 'User retrieved successfully.');
+        return $this->sendResponse([], 'User has been deleted successfully.');
     }
-
 }
